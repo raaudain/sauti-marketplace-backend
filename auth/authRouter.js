@@ -18,7 +18,7 @@ router.post("/register", validate.validateRegister, (req, res) => {
       res.status(201).json({ message: "Account created" });
     })
     .catch(err => {
-      res.status(500).json(err);
+      res.status(500).json({ message: `${err}` });
     });
 });
 
@@ -47,7 +47,7 @@ router.post("/login", validate.validateLogin, (req, res) => {
       }
     })
     .catch(err => {
-      res.status(500).json(err);
+      res.status(500).json({ message: `${err}` });
     });
 });
 
@@ -58,7 +58,7 @@ function signedToken(user) {
     username: user.username
   };
 
-  const secret = process.env.JWT_SECRET || "stay super secret";
+  const secret = process.env.JWT_SECRET || "stay secret";
 
   const options = {
     expiresIn: "1h"
